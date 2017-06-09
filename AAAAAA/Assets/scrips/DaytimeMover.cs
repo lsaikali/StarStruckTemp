@@ -281,7 +281,7 @@ public class DaytimeMover : MonoBehaviour
   void InputChecker()
   {
     // If we're in editor use mouse to test
-    if (Application.platform == RuntimePlatform.WindowsEditor)
+    if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
     {
       if (Input.GetMouseButtonDown(0))
       {
