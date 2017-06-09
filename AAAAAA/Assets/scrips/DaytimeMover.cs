@@ -212,8 +212,8 @@ public class DaytimeMover : MonoBehaviour
 
     // TODO: Reroll repeats for now just to get the ball rolling. Replace with proper audio code later
     //////////////////////////////////////////////////////////////////////////////////////////////////
-    soundIndex++;
-    if (soundIndex > MAX_SOUND) soundIndex = 0;
+	soundIndex = Random.Range(0, 13);
+    //if (soundIndex > MAX_SOUND) soundIndex = 0;
 
     gameObject.AddComponent<AudioSource>();
     var buttonSound = Instantiate(Resources.Load("Sound/StarSound" + (soundIndex.ToString())) as AudioClip);
