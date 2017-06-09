@@ -304,17 +304,20 @@ public class DaytimeMover : MonoBehaviour
 
       for (int i = 0; i < Input.touchCount; i++)
       {
-        Ray ray = Camera.main.ScreenPointToRay(myTouches[i].position);
-        RaycastHit hit;
-        GameObject obj;
-
-        if (Physics.Raycast(ray, out hit, 100))
+        if (myTouches[i].phase == TouchPhase.Began)
         {
-          obj = hit.transform.gameObject;
-        }
-        else obj = null;
+          Ray ray = Camera.main.ScreenPointToRay(myTouches[i].position);
+          RaycastHit hit;
+          GameObject obj;
 
-        ClickParse(obj);
+          if (Physics.Raycast(ray, out hit, 100))
+          {
+            obj = hit.transform.gameObject;
+          }
+          else obj = null;
+
+          ClickParse(obj);
+        }
       }
     }
   }
