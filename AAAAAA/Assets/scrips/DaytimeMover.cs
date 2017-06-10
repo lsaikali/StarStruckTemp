@@ -190,8 +190,8 @@ public class DaytimeMover : MonoBehaviour
     clicked.Add(obj);
   }
 
-  int soundIndex = 0;
-  const int MAX_SOUND = 7; // Hardcoded (Max is 13)
+  int prevSound = 0;
+  const int MAX_SOUND = 13; // Hardcoded (Max is 13)
   void ClickStar(GameObject obj)
   {
     ClickObject(obj);
@@ -212,10 +212,16 @@ public class DaytimeMover : MonoBehaviour
 
     obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/star_counted");
     
-	soundIndex = Random.Range(0, MAX_SOUND);
+    // Make sure we don't repeat the previous sound
+	  int sound = Random.Range(0, MAX_SOUND);
+    while(sound == prevSound)
+    {
+      sound = Random.Range(0, MAX_SOUND);
+    }
+    prevSound = sound;
 
     gameObject.AddComponent<AudioSource>();
-    var buttonSound = Instantiate(Resources.Load("Sound/StarSound" + (soundIndex.ToString())) as AudioClip);
+    var buttonSound = Instantiate(Resources.Load("Sound/StarSound" + (sound.ToString())) as AudioClip);
     gameObject.GetComponent<AudioSource>().PlayOneShot(buttonSound);
     
   }
@@ -230,12 +236,12 @@ public class DaytimeMover : MonoBehaviour
     ResetStreak();
     //environmentSpeed = initialEnvironmentSpeed / 2;
     //moveSpeed = initialSpeed / 2;
-	//spawnTime = initialSpawnTime / 2;
+	  //spawnTime = initialSpawnTime / 2;
   }
 
   void ResetStreak()
   {
-	dayTimeLeft = dayTimeLeft - timePenaltyOnMisclick;
+	  dayTimeLeft -= timePenaltyOnMisclick;
     //moveSpeed = Mathf.Min(initialSpeed, moveSpeed);
     //clickStreak = 0;
     //spawnTime = Mathf.Min(initialSpawnTime, spawnTime);
@@ -352,7 +358,7 @@ public class DaytimeMover : MonoBehaviour
   float tempEnvSpawnVariance = 1;
   void EnvSpawner()
   {
-    envSpawnTimer += Time.deltaTime * tempEnvSpawnVariance;
+    envSpawnTimer += Time.deltaTime * (((clickStreak) * progressionSpeed) + 1) * tempEnvSpawnVariance;
 
     if (envSpawnTimer >= 4)
     {
