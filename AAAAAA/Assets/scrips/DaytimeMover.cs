@@ -189,7 +189,7 @@ public class DaytimeMover : MonoBehaviour
   }
 
   int soundIndex = 0;
-  const int MAX_SOUND = 13; // Hardcoded
+  const int MAX_SOUND = 7; // Hardcoded (Max is 13)
   void ClickStar(GameObject obj)
   {
     ClickObject(obj);
@@ -209,16 +209,13 @@ public class DaytimeMover : MonoBehaviour
 
 
     obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/star_counted");
-
-    // TODO: Reroll repeats for now just to get the ball rolling. Replace with proper audio code later
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-	soundIndex++;
-    if (soundIndex > MAX_SOUND) soundIndex = 0;
+    
+	soundIndex = Random.Range(0, MAX_SOUND);
 
     gameObject.AddComponent<AudioSource>();
     var buttonSound = Instantiate(Resources.Load("Sound/StarSound" + (soundIndex.ToString())) as AudioClip);
     gameObject.GetComponent<AudioSource>().PlayOneShot(buttonSound);
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+    
   }
 
   void ClickObstacle(GameObject obj)
