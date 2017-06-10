@@ -31,6 +31,7 @@ public class DaytimeMover : MonoBehaviour
   [Header("Day Length Settings")]
   public float initialDayLength;
   public float timeGainedPerStar;
+  public float timePenaltyOnMisclick;
 
   [Header("Starting timing settings")]
   public float initialSpeed;
@@ -44,6 +45,7 @@ public class DaytimeMover : MonoBehaviour
   public float itemSpawnVariance;
   public float envSpawnVariance;
   public float progressionSpeed;
+
 
 
   float moveSpeed, environmentSpeed, spawnTime, dayTimeLeft;
@@ -233,7 +235,7 @@ public class DaytimeMover : MonoBehaviour
 
   void ResetStreak()
   {
-    dayTimeLeft--;
+	dayTimeLeft = dayTimeLeft - timePenaltyOnMisclick;
     //moveSpeed = Mathf.Min(initialSpeed, moveSpeed);
     //clickStreak = 0;
     //spawnTime = Mathf.Min(initialSpawnTime, spawnTime);
