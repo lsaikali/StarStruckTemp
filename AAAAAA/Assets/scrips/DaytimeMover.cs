@@ -226,18 +226,18 @@ public class DaytimeMover : MonoBehaviour
   void ObstaclePunish()
   {
     ResetStreak();
-    environmentSpeed = initialEnvironmentSpeed / 2;
-    moveSpeed = initialSpeed / 2;
-    spawnTime = initialSpawnTime / 2;
+    //environmentSpeed = initialEnvironmentSpeed / 2;
+    //moveSpeed = initialSpeed / 2;
+	//spawnTime = initialSpawnTime / 2;
   }
 
   void ResetStreak()
   {
     dayTimeLeft--;
-    moveSpeed = Mathf.Min(initialSpeed, moveSpeed);
-    clickStreak = 0;
-    spawnTime = Mathf.Min(initialSpawnTime, spawnTime);
-    environmentSpeed = Mathf.Min(initialEnvironmentSpeed, environmentSpeed);
+    //moveSpeed = Mathf.Min(initialSpeed, moveSpeed);
+    //clickStreak = 0;
+    //spawnTime = Mathf.Min(initialSpawnTime, spawnTime);
+    //environmentSpeed = Mathf.Min(initialEnvironmentSpeed, environmentSpeed);
   }
 
   void MisClick()
